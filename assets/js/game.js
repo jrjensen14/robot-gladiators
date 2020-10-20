@@ -6,25 +6,14 @@
 
 var playerName = window.prompt("whats your robots name?");
 var playerHealth = 100;
-if (playerHealth > 0) {
-    console.log("Your player is still alive!")
-}
 var playerAttack = 10;
 var playerMoney =  10;
 
-if (playerHealth === 0) {
-    console.log("this will not run.");
-}
-else {
-    console.log("this will not run instead.");
-}
-console.log(playerName, playerAttack, playerHealth);
-
-var enemyName = "Roberto";
+var enemyNames = ["Roberto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttach = 12;
 
-var fight = function() {
+var fight = function(enemyName) {
     window.alert("the fight has begun");
 
     var promptFight = window.prompt("would you like to FIGHT or SKIP? Enter 'FIGHT' or 'SKIP' to choose.")
@@ -76,8 +65,10 @@ var fight = function() {
     // Log a resulting messge to teh console so we know that it worked.
 }
 
-
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
+//fight();
 
 //} else {
    // window.alert("you need to choose a valid option. Try again!");
