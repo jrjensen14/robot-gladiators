@@ -17,26 +17,58 @@ var fight = function(enemyName) {
     //repeat and execute as long as the enemy-robot is alive
    while(playerHealth > 0 && enemyHealth > 0) {
     var promptFight = window.prompt("would you like to FIGHT or SKIP? Enter 'FIGHT' or 'SKIP' to choose.")
+    
+//function to start a new game
+var startGame = function() {
+    for (var i = 0; i < enemyNames.length; i++) {
+    //reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
 
-    if (playerHealth > 0) {
-        //Let player know what round they are in, arrays start at 0 so it needs to have 1 added to it
-        window.alert("Welcome to Robot Gladiators!" + (i + 1));
+        if (playerHealth > 0) {
+            //Let player know what round they are in, arrays start at 0 so it needs to have 1 added to it
+            window.alert("Welcome to Robot Gladiators!" + (i + 1));
+    
+            //pick new enemy to fight based on the index of the enemy array
+            var pickedEnemyName = enemyName[i];
+    
+            //reset enemyHealth before starting new fight
+            enemyHealth = 50
+    
+            //pass teh pickedEnemyName variable's value inot the fight function, where it will assume teh value of the enemyName parameter
+            fight(pickedEnemyName);
+        } 
+        else {
+            window.alert("you have lost your robot in battle! Game Over!");
+        }
+    } 
+    startGame();   
 
-        //pick new enemy to fight based on the index of the enemy array
-        var pickedEnemyName = enemyName[i];
+    //function to end the entire game
+    var endGame = function() {
+        if (playerHealth > 0) {
+            debugger
+            window.alert("great job, you've survived the game! You now have a score of" + playerMoney + ".");
+        }
+        else {
+            window.alert("You've lost your robot in battle"); 
+        }
 
-        //reset enemyHealth before starting new fight
-        enemyHealth = 50
-
-        //use debugger to pause scritpt from running and check what whats going on with the code
-        debugger;
-
-        //pass teh pickedEnemyName variable's value inot the fight function, where it will assume teh value of the enemyName parameter
-        fight(pickedEnemyName);
-    } else {
-        window.alert("you have lost your robot in battle! Game Over!");
+    var playAgainConfirm = window.confirm("would you like to play agian?");
+    
+    if (playAgainConfirm) {
+        //restart game
+        startGame();
     }
-
+    else {
+        window.alert("thank you for playing Robot Gladiators! come back soon!");
+    }
+    }  
+    //after the loop ends, player is either out of health or enemies to fight, so run the endGame function
+    endGame()  
+ };
+    
 // if player choses to skip
 if (promptFight === "skip" || promptFight === "SKIP") {
     // confirm player wants to skip
@@ -89,3 +121,4 @@ for(var i = 0; i < enemyNames.length; i++) {
     var pickedEnemyName = enemyNames[i];
     enemyHealth = 50;
     fight(pickedEnemyName);}
+
